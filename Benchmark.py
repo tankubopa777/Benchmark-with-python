@@ -35,17 +35,17 @@ print("Physical cores:", psutil.cpu_count(logical=False))
 print("Total cores:", psutil.cpu_count(logical=True))
 
 memory = psutil.virtual_memory()
-total = round(memory.total/1024.0/1024.0/1024.0)
+total1 = round(memory.total/1024.0/1024.0/1024.0)
 
 
 disk = psutil.disk_usage('/')
-total = round(disk.total/1024.0/1024.0/1024.0)
+total2 = round(disk.total/1024.0/1024.0/1024.0)
 
 
 myLabel1 = Label(text=f"Total cores: {psutil.cpu_count(logical=True)}",font="Consolas 16",fg="green",bg="black").place(x=350,y=200)
 myLabel1 = Label(text=f"Physical cores: {psutil.cpu_count(logical=False)}",font="Consolas 16",fg="green",bg="black").place(x=350,y=230)
-myLabel2 = Label(text=f"RAM {total} GB",font="Consolas 16",fg="green",bg="black").place(x=350,y=260)
-myLabel2 = Label(text=f"Disk : {total} GB",font="Consolas 16",fg="green",bg="black").place(x=350,y=290)
+myLabel2 = Label(text=f"RAM {total1} GB",font="Consolas 16",fg="green",bg="black").place(x=350,y=260)
+myLabel2 = Label(text=f"Disk : {total2} GB",font="Consolas 16",fg="green",bg="black").place(x=350,y=290)
 
 def memory():
     a = []
