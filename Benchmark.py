@@ -56,7 +56,7 @@ def memory():
         if a.__sizeof__() > 1073741824 :
             break
     print(f'memory benchmark use {time.time()-start}')
-    return Label(text=f"Score :{1000000/(time.time()-start)} ",font="Consolas 16",fg="green",bg="black").place(x=400,y=400)
+    return Label(text=f"Score :{1000000/(time.time()-start)}",font="Consolas 16",fg="green",bg="black").place(x=400,y=400)
 
 def checkPrime(n):
     c = 0
@@ -75,8 +75,8 @@ def cpu():
             break
         checkPrime(i)
         i += 1
-    print(f"Ur computer check prime number to 153822 use {(time.time() - start)} ")
-    return Label(text=f"Score :{1000000/(time.time()-start)} ",font="Consolas 16",fg="green",bg="black").place(x=400,y=330)
+    print(f"Ur computer check prime number to 153822 use {(time.time() - start)} second")
+    return Label(text=f"Score :{1000000/(time.time()-start)}",font="Consolas 16",fg="green",bg="black").place(x=400,y=330)
     
 
 def disk():
@@ -88,7 +88,7 @@ def disk():
     print(os.path.getsize("file.xxx"))
     file.close()
     print(f'disk bench use {time.time()-start}')
-    return Label(text=f"Score :{1000000/(time.time()-start)} ",font="Consolas 16",fg="green",bg="black").place(x=400,y=470)
+    return Label(text=f"Score :{1000000/(time.time()-start)}",font="Consolas 16",fg="green",bg="black").place(x=400,y=470)
 
 
 
