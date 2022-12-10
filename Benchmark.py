@@ -53,7 +53,7 @@ def memory():
     while True:
         a.append(list())
     #5 gb
-        if a.__sizeof__() > 107 :
+        if a.__sizeof__() > 1073741824 :
             break
     print(f'memory benchmark use {time.time()-start}')
     return Label(text=f"Score :{time.time()-start} second",font="Consolas 16",fg="green",bg="black").place(x=400,y=400)
@@ -71,7 +71,7 @@ def cpu():
     start = time.time()
     i = 1
     while True:
-        if i == 10:
+        if i == 153822:
             break
         checkPrime(i)
         i += 1
