@@ -46,6 +46,7 @@ myLabel1 = Label(text=f"Total cores: {psutil.cpu_count(logical=True)}",font="Con
 myLabel1 = Label(text=f"Physical cores: {psutil.cpu_count(logical=False)}",font="Consolas 16",fg="green",bg="black").place(x=350,y=210)
 myLabel2 = Label(text=f"RAM {total1} GB",font="Consolas 16",fg="green",bg="black").place(x=350,y=240)
 myLabel2 = Label(text=f"Disk : {total2} GB",font="Consolas 16",fg="green",bg="black").place(x=350,y=270)
+myLabel2 = Label(text=f"Version 1.0",font="Consolas 10",fg="green",bg="black").place(x=900,y=670)
 
 def memory():
     a = []
