@@ -42,10 +42,10 @@ disk = psutil.disk_usage('/')
 total2 = round(disk.total/1024.0/1024.0/1024.0)
 
 
-myLabel1 = Label(text=f"Total cores: {psutil.cpu_count(logical=True)}",font="Consolas 16",fg="green",bg="black").place(x=350,y=200)
-myLabel1 = Label(text=f"Physical cores: {psutil.cpu_count(logical=False)}",font="Consolas 16",fg="green",bg="black").place(x=350,y=230)
-myLabel2 = Label(text=f"RAM {total1} GB",font="Consolas 16",fg="green",bg="black").place(x=350,y=260)
-myLabel2 = Label(text=f"Disk : {total2} GB",font="Consolas 16",fg="green",bg="black").place(x=350,y=290)
+myLabel1 = Label(text=f"Total cores: {psutil.cpu_count(logical=True)}",font="Consolas 16",fg="green",bg="black").place(x=350,y=180)
+myLabel1 = Label(text=f"Physical cores: {psutil.cpu_count(logical=False)}",font="Consolas 16",fg="green",bg="black").place(x=350,y=210)
+myLabel2 = Label(text=f"RAM {total1} GB",font="Consolas 16",fg="green",bg="black").place(x=350,y=240)
+myLabel2 = Label(text=f"Disk : {total2} GB",font="Consolas 16",fg="green",bg="black").place(x=350,y=270)
 
 def memory():
     a = []
@@ -56,7 +56,7 @@ def memory():
         if a.__sizeof__() > 1073741824 :
             break
     print(f'memory benchmark use {time.time()-start}')
-    return Label(text=f"Score :{1000000/(time.time()-start)}",font="Consolas 16",fg="green",bg="black").place(x=400,y=400)
+    return Label(text=f"Score :{1000000/(time.time()-start):.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=400)
 
 def checkPrime(n):
     c = 0
@@ -71,26 +71,26 @@ def cpu():
     start = time.time()
     i = 1
     while True:
-        if i == 153822:
+        if i == 100000:
             break
         checkPrime(i)
         i += 1
     print(f"Ur computer check prime number to 153822 use {(time.time() - start)} second")
-    return Label(text=f"Score :{1000000/(time.time()-start)}",font="Consolas 16",fg="green",bg="black").place(x=400,y=330)
+    return Label(text=f"Score :{1000000/(time.time()-start):.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=330)
     
 
 def disk():
     start = time.time()
     garbage = bytes(1073741824)
+    if os.path.exists("file.xxx"):
+        os.remove("file.xxx")
     with open("file.xxx", "wb+") as file:
         for _ in range(10):
             file.write(garbage)
     print(os.path.getsize("file.xxx"))
     file.close()
     print(f'disk bench use {time.time()-start}')
-    return Label(text=f"Score :{1000000/(time.time()-start)}",font="Consolas 16",fg="green",bg="black").place(x=400,y=470)
-
-
+    return Label(text=f"Score :{1000000/(time.time()-start):.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=470)
 
 CPUbutton = Button(app, text = "Benchmark my CPU",width=20,height=2,font="Consolas 12",fg="green",bg="black",command=cpu).place(x=100,y=320)
 
