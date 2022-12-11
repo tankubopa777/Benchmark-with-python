@@ -79,7 +79,6 @@ def cpu():
     print(f"Ur computer check prime number to 153822 use {(time.time() - start)} second")
     return Label(text=f"Score :{1000000/(time.time()-start):.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=330)
     
-
 def disk():
     start = time.time()
     garbage = bytes(1073741824)
