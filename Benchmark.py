@@ -53,7 +53,7 @@ def memory():
     start = time.time()
     while True:
         a.append(list())
-    #5 gb
+    #1 gb
         if a.__sizeof__() > 1073741824 :
             break
     print(f'memory use {time.time()-start} second')
