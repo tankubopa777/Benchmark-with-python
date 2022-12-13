@@ -48,6 +48,10 @@ myLabel2 = Label(text=f"RAM {total1} GB",font="Consolas 16",fg="green",bg="black
 myLabel2 = Label(text=f"Disk : {total2} GB",font="Consolas 16",fg="green",bg="black").place(x=350,y=270)
 myLabel2 = Label(text=f"Version 1.1",font="Consolas 10",fg="green",bg="black").place(x=900,y=670)
 
+cpuScore = 0
+memoryScore = 0
+diskScore = 0
+
 def memory():
     a = []
     start = time.time()
@@ -57,7 +61,10 @@ def memory():
         if a.__sizeof__() > 1073741824 :
             break
     print(f'memory use {time.time()-start} second')
-    return Label(text=f"Score :{1000000/(time.time()-start):.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=400)
+    global memoryScore
+    memoryScore = 1000000/(time.time()-start)
+    overallUpdate()
+    return Label(text=f"Score :{memoryScore:.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=400)
 
 def checkPrime(n):
     c = 0
@@ -77,7 +84,10 @@ def cpu():
         checkPrime(i)
         i += 1
     print(f"cpu  use {(time.time() - start)} second")
-    return Label(text=f"Score :{1000000/(time.time()-start):.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=330)
+    global cpuScore
+    cpuScore = 1000000/(time.time()-start)
+    overallUpdate()
+    return Label(text=f"Score :{cpuScore:.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=330)
     
 def disk():
     start = time.time()
@@ -90,7 +100,14 @@ def disk():
     print(os.path.getsize("file.xxx"))
     file.close()
     print(f'disk use {time.time()-start} second')
-    return Label(text=f"Score :{1000000/(time.time()-start):.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=470)
+    global diskScore
+    diskScore = 1000000/(time.time()-start)
+    overallUpdate()
+    return Label(text=f"Score :{diskScore:.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=470)
+
+def overallUpdate():
+    allScoreLabel = Label(text=f"Overall Score :{cpuScore + memoryScore + diskScore :.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=540)
+    return allScoreLabel
 
 CPUbutton = Button(app, text = "Benchmark my CPU",width=20,height=2,font="Consolas 12",fg="green",bg="black",command=cpu).place(x=100,y=320)
 
