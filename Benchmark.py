@@ -4,27 +4,25 @@ import os
 import psutil
 import platform
 
-# from PIL import ImageTk, Image
+
 
 
 app = Tk()
 app.title("Benchmark by python")
 
-# Picture manage
-# imagebg = Image.open("C:\\Users\\tankubopa\\Desktop\\CN210\\bgpic4.jpg")
-# backgroundImage = ImageTk.PhotoImage(imagebg)
-# lbl = Label(app,image=backgroundImage)
-# lbl.place(x=0,y=0)
+# Add image file
+bg = PhotoImage(file = "CPUTestBackground2.png")
+  
+# Show image using label
+label1 = Label( app, image = bg)
+label1.place(x = 0, y = 0)
 
 # Screen manage
-app.geometry("1000x700")
+app.geometry("1200x675")
+app.minsize("1200","675")
+app.maxsize("1200","675")
 app.config(bg="black")
-#app.maxsize("450","300")
-#app.minsize("450","300")
 
-myLabel1 = Label(text="The Hackerman! Computer Benchmark Program",font="Consolas 16",fg="green",bg="black").place(x=350,y=60)
-myLabel2 = Label(text="We will hack your computer...",font="Consolas 16",fg="green",bg="black").place(x=350,y=100)
-myLabel2 = Label(text="We know your computer spec",font="Consolas 16",fg="green",bg="black").place(x=350,y=140)
 
 user = platform.uname()
 print(f"OS : {user.system}")
@@ -42,15 +40,10 @@ disk = psutil.disk_usage('/')
 total2 = round(disk.total/1024.0/1024.0/1024.0)
 
 
-myLabel1 = Label(text=f"Total cores: {psutil.cpu_count(logical=True)}",font="Consolas 16",fg="green",bg="black").place(x=350,y=180)
-myLabel1 = Label(text=f"Physical cores: {psutil.cpu_count(logical=False)}",font="Consolas 16",fg="green",bg="black").place(x=350,y=210)
-myLabel2 = Label(text=f"RAM {total1} GB",font="Consolas 16",fg="green",bg="black").place(x=350,y=240)
-myLabel2 = Label(text=f"Disk : {total2} GB",font="Consolas 16",fg="green",bg="black").place(x=350,y=270)
-myLabel2 = Label(text=f"Version 1.1",font="Consolas 10",fg="green",bg="black").place(x=900,y=670)
-
-cpuScore = 0
-memoryScore = 0
-diskScore = 0
+myLabel1 = Label(text=f"Total cores : {psutil.cpu_count(logical=True)}",font="Consolas 18",fg="#21ef80",bg="black").place(x=270,y=320)
+myLabel2 = Label(text=f"RAM {total1} GB",font="Consolas 18",fg="#ff63d8",bg="black").place(x=550,y=320)
+myLabel2 = Label(text=f"Disk : {total2} GB",font="Consolas 18",fg="#ffd707",bg="black").place(x=760,y=320)
+myLabel2 = Label(text=f"Version 2.0",font="Consolas 10",fg="green",bg="black").place(x=900,y=670)
 
 def memory():
     a = []
@@ -58,13 +51,10 @@ def memory():
     while True:
         a.append(list())
     #1 gb
-        if a.__sizeof__() > 1073741824 :
+        if a.__sizeof__() > 1073741824 : 
             break
     print(f'memory use {time.time()-start} second')
-    global memoryScore
-    memoryScore = 1000000/(time.time()-start)
-    overallUpdate()
-    return Label(text=f"Score :{memoryScore:.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=400)
+    Label(text=f"{1000000/(time.time()-start+1):.2f}",font="Consolas 16",fg="#21ef80",bg="#ff63d8").place(x=550,y=415)
 
 def checkPrime(n):
     c = 0
@@ -79,19 +69,16 @@ def cpu():
     start = time.time()
     i = 1
     while True:
-        if i == 100000:
+        if i == 100000: 
             break
         checkPrime(i)
         i += 1
     print(f"cpu  use {(time.time() - start)} second")
-    global cpuScore
-    cpuScore = 1000000/(time.time()-start)
-    overallUpdate()
-    return Label(text=f"Score :{cpuScore:.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=330)
+    Label(text=f"{1000000/(time.time()-start):.2f}",font="Consolas 16",fg="#585eff",bg="#21ef80").place(x=300,y=415)
     
 def disk():
     start = time.time()
-    garbage = bytes(1073741824)
+    garbage = bytes(1073741824) 
     if os.path.exists("file.xxx"):
         os.remove("file.xxx")
     with open("file.xxx", "wb+") as file:
@@ -100,20 +87,19 @@ def disk():
     print(os.path.getsize("file.xxx"))
     file.close()
     print(f'disk use {time.time()-start} second')
-    global diskScore
-    diskScore = 1000000/(time.time()-start)
-    overallUpdate()
-    return Label(text=f"Score :{diskScore:.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=470)
+    Label(text=f"{1000000/(time.time()-start+1):.2f}",font="Consolas 16",fg="#585eff",bg="#ffd707").place(x=790,y=415)
 
-def overallUpdate():
-    allScoreLabel = Label(text=f"Overall Score :{cpuScore + memoryScore + diskScore :.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=540)
-    return allScoreLabel
 
-CPUbutton = Button(app, text = "Benchmark my CPU",width=20,height=2,font="Consolas 12",fg="green",bg="black",command=cpu).place(x=100,y=320)
+def start_bench():
+    cpu()
+    memory()
+    disk()
+    Label(text=f"Average scores",font="Consolas 16",fg="#edb469",bg="#5ce6dd").place(x=665,y=515)
 
-Membutton = Button(app, text = "Benchmark my Memory",width=20,height=2,font="Consolas 12",fg="green",bg="black",command=memory).place(x=100,y=390)
 
-Diskbutton = Button(app, text = "Benchmark my Disk",width=20,height=2,font="Consolas 12",fg="green",bg="black",command=disk).place(x=100,y=460)
+photo = PhotoImage(file = r"StartButtonFinal.png")
+Startbutton = Button(app, image = photo,command=start_bench,borderwidth=0,bg = '#8488f4').place(x=465,y=226)
+
 
 
 app.mainloop()
