@@ -54,7 +54,10 @@ def memory():
         if a.__sizeof__() > 1073741824 : 
             break
     print(f'memory use {time.time()-start} second')
-    Label(text=f"{1000000/(time.time()-start+1):.2f}",font="Consolas 16",fg="#21ef80",bg="#ff63d8").place(x=550,y=415)
+    global memoryScore
+    memoryScore = 1000000/(time.time()-start)
+    overallUpdate()
+    return Label(text=f"Score :{memoryScore:.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=400)
 
 def checkPrime(n):
     c = 0
@@ -74,7 +77,10 @@ def cpu():
         checkPrime(i)
         i += 1
     print(f"cpu  use {(time.time() - start)} second")
-    Label(text=f"{1000000/(time.time()-start):.2f}",font="Consolas 16",fg="#585eff",bg="#21ef80").place(x=300,y=415)
+    global cpuScore
+    cpuScore = 1000000/(time.time()-start)
+    overallUpdate()
+    return Label(text=f"Score :{cpuScore:.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=330)
     
 def disk():
     start = time.time()
@@ -87,14 +93,14 @@ def disk():
     print(os.path.getsize("file.xxx"))
     file.close()
     print(f'disk use {time.time()-start} second')
-    Label(text=f"{1000000/(time.time()-start+1):.2f}",font="Consolas 16",fg="#585eff",bg="#ffd707").place(x=790,y=415)
+    global diskScore
+    diskScore = 1000000/(time.time()-start)
+    overallUpdate()
+    return Label(text=f"Score :{diskScore:.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=470)
 
-
-def start_bench():
-    cpu()
-    memory()
-    disk()
-    Label(text=f"Average scores",font="Consolas 16",fg="#edb469",bg="#5ce6dd").place(x=665,y=515)
+def overallUpdate():
+    allScoreLabel = Label(text=f"Overall Score :{cpuScore + memoryScore + diskScore :.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=540)
+    return allScoreLabel
 
 
 photo = PhotoImage(file = r"StartButtonFinal.png")
