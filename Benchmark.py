@@ -56,7 +56,7 @@ def memory():
     #5 gb
         if a.__sizeof__() > 1073741824 :
             break
-    print(f'memory benchmark use {time.time()-start}')
+    print(f'memory use {time.time()-start} second')
     return Label(text=f"Score :{1000000/(time.time()-start):.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=400)
 
 def checkPrime(n):
@@ -76,7 +76,7 @@ def cpu():
             break
         checkPrime(i)
         i += 1
-    print(f"Ur computer check prime number to 153822 use {(time.time() - start)} second")
+    print(f"cpu  use {(time.time() - start)} second")
     return Label(text=f"Score :{1000000/(time.time()-start):.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=330)
     
 def disk():
@@ -89,7 +89,7 @@ def disk():
             file.write(garbage)
     print(os.path.getsize("file.xxx"))
     file.close()
-    print(f'disk bench use {time.time()-start}')
+    print(f'disk use {time.time()-start} second')
     return Label(text=f"Score :{1000000/(time.time()-start):.2f}",font="Consolas 16",fg="green",bg="black").place(x=400,y=470)
 
 CPUbutton = Button(app, text = "Benchmark my CPU",width=20,height=2,font="Consolas 12",fg="green",bg="black",command=cpu).place(x=100,y=320)
