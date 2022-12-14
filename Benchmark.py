@@ -96,7 +96,6 @@ def disk():
     with open("file.xxx", "wb+") as file:
         for _ in range(10):
             file.write(garbage)
-    print(os.path.getsize("file.xxx"))
     global diskScore
     diskScore = 1000000/(time.time()-start)
     overallUpdate()
