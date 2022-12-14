@@ -60,9 +60,9 @@ def memory():
             break
     print(f'memory use {time.time()-start} second')
     global memoryScore
-    memoryScore = 1000000/(time.time()-start)
+    memoryScore = 300000/(time.time()-start)
     overallUpdate()
-    Label(text=f"{1000000/(time.time()-start):.2f}",font="Consolas 16",fg="#21ef80",bg="#ff63d8").place(x=540,y=415)
+    Label(text=f"{memoryScore:.2f}",font="Consolas 16",fg="#21ef80",bg="#ff63d8").place(x=540,y=415)
 
 def checkPrime(n):
     c = 0
@@ -86,23 +86,21 @@ def cpu():
     global cpuScore
     cpuScore = 1000000/(time.time()-start)
     overallUpdate()
-    Label(text=f"{1000000/(time.time()-start):.2f}",font="Consolas 16",fg="#585eff",bg="#21ef80").place(x=310,y=415)
+    Label(text=f"{cpuScore:.2f}",font="Consolas 16",fg="#585eff",bg="#21ef80").place(x=310,y=415)
     
 def disk():
     start = time.time()
     garbage = bytes(1073741824) 
-    if os.path.exists("file.xxx"):
-        os.remove("file.xxx")
     with open("file.xxx", "wb+") as file:
         for _ in range(10):
             file.write(garbage)
     global diskScore
-    diskScore = 1000000/(time.time()-start)
+    diskScore = 100000/(time.time()-start)
     overallUpdate()
     file.close()
     os.remove("file.xxx")
     print(f'disk use {time.time()-start} second')
-    Label(text=f"{1000000/(time.time()-start):.2f}",font="Consolas 16",fg="#585eff",bg="#ffd707").place(x=790,y=415)
+    Label(text=f"{diskScore:.2f}",font="Consolas 16",fg="#585eff",bg="#ffd707").place(x=790,y=415)
 
 def overallUpdate():
     return f"{cpuScore + memoryScore + diskScore :.2f}"
