@@ -55,9 +55,8 @@ def memory():
     start = time.time()
     while True:
         a.append(list())
-    #1 gb
-        if a.__sizeof__() > 107345:
-        #if a.__sizeof__() > 1073741824 : 
+        #if a.__sizeof__() > 107345:
+        if a.__sizeof__() > 1073741824 : 
             break
     print(f'memory use {time.time()-start} second')
     global memoryScore
@@ -78,8 +77,8 @@ def cpu():
     start = time.time()
     i = 1
     while True:
-        if i == 10000:
-        #if i == 100000: 
+        #if i == 10000:
+        if i == 100000: 
             break
         checkPrime(i)
         i += 1
@@ -102,6 +101,7 @@ def disk():
     diskScore = 1000000/(time.time()-start)
     overallUpdate()
     file.close()
+    os.remove("file.xxx")
     print(f'disk use {time.time()-start} second')
     Label(text=f"{1000000/(time.time()-start):.2f}",font="Consolas 16",fg="#585eff",bg="#ffd707").place(x=790,y=415)
 
