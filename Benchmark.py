@@ -103,7 +103,7 @@ def disk():
     Label(text=f"{diskScore:.2f}",font="Consolas 16",fg="#585eff",bg="#ffd707").place(x=790,y=415)
 
 def overallUpdate():
-    return f"{cpuScore + memoryScore + diskScore :.2f}"
+    return f"{(1.5*cpuScore + memoryScore + 0.5*diskScore)/3 :.2f}"
 
 def start_bench():
     cpu()
