@@ -62,7 +62,7 @@ def memory():
     global memoryScore
     memoryScore = 300000/(time.time()-start)
     overallUpdate()
-    Label(text=f"{memoryScore:.2f}",font="Consolas 16",fg="#21ef80",bg="#ff63d8").place(x=540,y=415)
+    Label(text=f"{memoryScore:.2f}",font="Consolas 16",fg="#21ef80",bg="#ff63d8").place(x=560,y=415)
 
 def checkPrime(n):
     c = 0
@@ -86,7 +86,7 @@ def cpu():
     global cpuScore
     cpuScore = 1000000/(time.time()-start)
     overallUpdate()
-    Label(text=f"{cpuScore:.2f}",font="Consolas 16",fg="#585eff",bg="#21ef80").place(x=310,y=415)
+    Label(text=f"{cpuScore:.2f}",font="Consolas 16",fg="#585eff",bg="#21ef80").place(x=330,y=415)
     
 def disk():
     start = time.time()
@@ -100,7 +100,7 @@ def disk():
     file.close()
     os.remove("file.xxx")
     print(f'disk use {time.time()-start} second')
-    Label(text=f"{diskScore:.2f}",font="Consolas 16",fg="#585eff",bg="#ffd707").place(x=790,y=415)
+    Label(text=f"{diskScore:.2f}",font="Consolas 16",fg="#585eff",bg="#ffd707").place(x=800,y=415)
 
 def overallUpdate():
     return f"{(1.5*cpuScore + memoryScore + 0.5*diskScore)/3 :.2f}"
